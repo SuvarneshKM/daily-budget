@@ -1,19 +1,19 @@
-const tintColorLight = '#2f95dc';
-const tintColorDark = '#fff';
+export const categoryColors: { [key: string]: string } = {
+  Movie: "#FFD700", // Gold
+  Travel: "#FF6347", // Tomato
+  Food: "#32CD32", // LimeGreen
+  Grocery: "#FFDEAD", // NavajoWhite
+  Shoping: "#F0E68C", // Khaki
+  Job: "#CD853F", // Peru
+  Default: "#D3D3D3", // LightGray
+};
 
-export default {
-  light: {
-    text: '#000',
-    background: '#fff',
-    tint: tintColorLight,
-    tabIconDefault: '#ccc',
-    tabIconSelected: tintColorLight,
-  },
-  dark: {
-    text: '#fff',
-    background: '#000',
-    tint: tintColorDark,
-    tabIconDefault: '#ccc',
-    tabIconSelected: tintColorDark,
-  },
+export const categoryEmojies: { [key: string]: string } = {
+  Movie: "🎥", // Gold
+  Travel: "🚀", // Tomato
+  Food: "🍔", // LimeGreen
+  Grocery: "🛒", // NavajoWhite
+  Shoping: "🛍️", // Khaki
+  Job: "💼", // Peru
+  Default: "🫰🏼", // LightGray
 };
