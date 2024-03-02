@@ -124,6 +124,7 @@ export default function AddTransaction({
     <View style={{ marginBottom: 15 }}>
       {isAddingTransaction ? (
         <Modal
+          presentationStyle="formSheet"
           animationType="slide"
           transparent={false}
           visible={isAddingTransaction}
@@ -314,6 +315,7 @@ function AddNewCategory({
     </TouchableOpacity>
   ) : (
     <Modal
+      presentationStyle="formSheet"
       animationType="slide"
       transparent={false}
       visible={isInput}

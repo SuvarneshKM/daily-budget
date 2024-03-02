@@ -23,27 +23,27 @@ export const unstable_settings = {
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-async function openDatabase(): Promise<SQLite.WebSQLDatabase> {
-  if (
-    !(await FileSystem.getInfoAsync(FileSystem.documentDirectory + "SQLite"))
-      .exists
-  ) {
+const loadDatabase = async () => {
+  const dbName = "mySQLiteDB.db";
+  const dbAsset = require("../assets/mySQLiteDB.db");
+  const dbUri = Asset.fromModule(dbAsset).uri;
+  const dbFilePath = `${FileSystem.documentDirectory}SQLite/${dbName}`;
+
+  const fileInfo = await FileSystem.getInfoAsync(dbFilePath);
+  if (!fileInfo.exists) {
     await FileSystem.makeDirectoryAsync(
-      FileSystem.documentDirectory + "SQLite"
+      `${FileSystem.documentDirectory}SQLite`,
+      { intermediates: true }
     );
+    await FileSystem.downloadAsync(dbUri, dbFilePath);
   }
-  await FileSystem.downloadAsync(
-    Asset.fromModule(require("../assets/mySQLiteDB.db")).uri,
-    FileSystem.documentDirectory + "SQLite/mySQLiteDB.db"
-  );
-  return SQLite.openDatabase("mySQLiteDB.db");
-}
+};
 
 export default function RootLayout() {
   const [dbLoaded, setDbLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    openDatabase()
+    loadDatabase()
       .then(() => setDbLoaded(true))
       .catch((e) => console.error(e));
   }, []);
